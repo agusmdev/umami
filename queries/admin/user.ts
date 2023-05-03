@@ -9,8 +9,9 @@ export async function getUser(
   options: { includePassword?: boolean; showDeleted?: boolean } = {},
 ): Promise<User> {
   const { includePassword = false, showDeleted = false } = options;
-
-  return prisma.client.user.findFirst({
+  
+  console.log("prisma")
+  const x = prisma.client.user.findFirst({
     where: { ...where, ...(showDeleted ? {} : { deletedAt: null }) },
     select: {
       id: true,
@@ -20,6 +21,8 @@ export async function getUser(
       createdAt: true,
     },
   });
+  console.log("prisma", x)
+  return x
 }
 
 export async function getUsers(): Promise<User[]> {
