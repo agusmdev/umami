@@ -43,7 +43,7 @@ export interface NextApiRequestCollect extends NextApiRequest {
 }
 
 export default async (req: NextApiRequestCollect, res: NextApiResponse) => {
-  await useCors(req, res);
+  // await useCors(req, res); // Remove CORS because they were not working properly
 
   if (isbot(req.headers['user-agent']) && !process.env.DISABLE_BOT_CHECK) {
     return ok(res);
@@ -76,7 +76,7 @@ export default async (req: NextApiRequestCollect, res: NextApiResponse) => {
       const resolver = new Resolver();
       const promises = ignoreHostnames
         .split(',')
-        .map(n => resolver.resolve4(n.trim()).catch(() => {}));
+        .map(n => resolver.resolve4(n.trim()).catch(() => { }));
 
       await Promise.all(promises).then(resolvedIps => {
         ips.push(...resolvedIps.filter(n => n).flatMap(n => n as string[]));

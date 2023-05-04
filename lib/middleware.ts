@@ -15,6 +15,8 @@ const log = debug('umami:middleware');
 export const useCors = createMiddleware(
   cors({
     // Cache CORS preflight request 24 hours by default
+    // methods: "*",
+    // maxAge: 0,
     maxAge: process.env.CORS_MAX_AGE || 86400,
   }),
 );
