@@ -12,7 +12,12 @@ export default {
   },
   stacks(app) {
     app.stack(function Site({ stack }) {
-      const site = new NextjsSite(stack, "site")
+      const site = new NextjsSite(stack, "site", {
+        customDomain: {
+          domainName: "metrics.techwarely.com",
+          hostedZone: "metrics.techwarely.com"
+        }
+      })
 
       stack.addOutputs({
         SiteUrl: site.url,
